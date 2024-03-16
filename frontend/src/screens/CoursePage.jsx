@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FormContainer from "../components/FormContainer";
-import { Form } from "react-bootstrap";
+import { Form, Carousel } from "react-bootstrap";
 import queryString from "query-string";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -12,8 +12,9 @@ function CoursePage() {
   const location = useLocation();
   const { githuburl, coursetitle } = queryString.parse(location.search);
   const userInfo = useSelector((state) => state.auth);
-  // console.log(userInfo.userInfo._id);
+  console.log(userInfo.userInfo._id);
   const [link, setLink] = useState("");
+
   const saveLinkToUserCourses = async () => {
     try {
       // console.log("Mein run hua");
@@ -46,51 +47,67 @@ function CoursePage() {
       console.error("Error saving link:", error);
     }
   };
+
   return (
-    <div className="flex flex-col justify-center items-start gap-y-5">
-      <p>Click the button below to download the Notebook from GitHub</p>
-      <a
-        href={githuburl}
-        target="_blank"
-        className=" hover:bg-blue-400  transition-all duration-300 no-underline cursor-pointer py-2 px-5 bg-blue-600 rounded-md font-semibold text-white"
-      >
-        Click Here
-      </a>
-      <Form.Group className="my-2" controlId="password">
-        <Form.Label>Enter your Notebooks Public Link</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Public Link"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-        ></Form.Control>
-      </Form.Group>
-      <button
-        onClick={saveLinkToUserCourses}
-        className=" hover:bg-blue-400 transition-all duration-300 no-underline cursor-pointer py-2 px-5 bg-blue-600 rounded-md font-semibold text-white"
-      >
-        {isLoading ? (
-          <div className=" flex w-full justify-center">
-            <ThreeDots
-              visible={true}
-              height="21"
-              width="50"
-              color="#ffffff"
-              radius="9"
-              ariaLabel="three-dots-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-            />
-          </div>
-        ) : (
-          <div
-            className="
-                "
-          >
-            Submit
-          </div>
-        )}
-      </button>
+    <div>
+      <FormContainer>
+        <p className=" font-semibold">
+          Click the button below to download the Notebook from GitHub
+        </p>
+        <a
+          href="https://mybinder.org/v2/gh/Shamshadz/binder-test-repo/HEAD"
+          target="_blank"
+          className="hover:bg-blue-400 justify-center items-center flex transition-all duration-300 no-underline cursor-pointer py-2 px-5 bg-blue-600 rounded-md font-semibold text-white"
+        >
+          Click Here
+        </a>
+        <Form.Group className="my-4" controlId="password">
+          <Form.Label className=" font-semibold">
+            Enter your Notebook's Public Link
+          </Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Public Link"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+          />
+        </Form.Group>
+        <button
+          onClick={saveLinkToUserCourses}
+          className="hover:bg-blue-400 transition-all duration-300 no-underline cursor-pointer py-2 px-5 bg-blue-600 rounded-md font-semibold text-white"
+        >
+          {isLoading ? (
+            <div className="flex justify-center">
+              <ThreeDots
+                visible={true}
+                height={21}
+                width={50}
+                color="#ffffff"
+                radius={9}
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            </div>
+          ) : (
+            "Submit"
+          )}
+        </button>
+      </FormContainer>
+      <div className="mt-5">
+        <h3>References:</h3>
+        <ul>
+          <li>
+            <a href="https://www.open-mpi.org/doc/" target="_blank">Reference 1</a>
+          </li>
+          <li>
+            <a href="#">Reference 2</a>
+          </li>
+          <li>
+            <a href="#">Reference 3</a>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

@@ -19,6 +19,6 @@ router
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
 
-router.post("/add-course-url", protect, addCourseURLToUser);
+router.post("/add-course-url", addCourseURLToUser);
 
 export default router;

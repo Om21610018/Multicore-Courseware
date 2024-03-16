@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    coursesURLs: [{courseURL}],
+    coursesURLs: [{ courseURL }],
   },
   {
     timestamps: true,
