@@ -6,6 +6,7 @@ import {
   getUserProfile,
   updateUserProfile,
   addCourseURLToUser,
+  addCourse,
 } from "../controllers/userController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -20,5 +21,7 @@ router
   .put(protect, updateUserProfile);
 
 router.post("/add-course-url", addCourseURLToUser);
+router.post("/add-course", addCourse);
+// router.post();
 
 export default router;

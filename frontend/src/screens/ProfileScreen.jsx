@@ -89,7 +89,7 @@ const ProfileScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary" className="mt-3">
+        <Button onClick={updateProfile} type="submit" variant="primary" className="mt-3">
           {isLoading ? (
             <div className=" flex w-full justify-center">
               <ThreeDots

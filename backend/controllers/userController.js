@@ -1,6 +1,8 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+import Course from "../models/courseModel.js";
+// const Course = require("../models/courseModel");
 
 // @desc    Auth user & get token
 // @route   POST /api/users/auth
@@ -113,7 +115,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-const addCourseURLToUser = async (req, res) => {
+const addCourseURLToUser = asyncHandler(async (req, res) => {
+  console.log(req.cookies);
   const { userId, courseName, courseUrl } = req.body;
 
   try {
@@ -131,7 +134,26 @@ const addCourseURLToUser = async (req, res) => {
     console.error(error);
     return res.status(500).json({ message: "Server error" });
   }
-};
+});
+
+const addCourse = asyncHandler(async (req, res) => {
+  const { title, description, thumbnail, notebookurl } = req.body;
+
+  const course = new Course({
+    title,
+    description,
+    thumbnail,
+    notebookurl,
+  });
+
+  try {
+    const newCourse = await course.save();
+    res.status(201).json(newCourse);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 export {
   authUser,
@@ -140,4 +162,5 @@ export {
   getUserProfile,
   updateUserProfile,
   addCourseURLToUser,
+  addCourse,
 };

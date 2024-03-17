@@ -1,8 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import authSlice from "../slices/authSlice";
 
 function Course({ course }) {
   const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
 
   return (
     <div
@@ -22,6 +25,9 @@ function Course({ course }) {
         <p className=" font-bold text-2xl">{course.title}</p>
         <p className=" px-4 text-justify">{course.description}</p>
       </div>
+      {/* <button className=" rounded-md hover:bg-blue-500  bg-blue-600 py-2 px-3 text-white  flex justify-center items-center">
+        {userInfo ? "Get Started" : "Buy Now"}
+      </button> */}
     </div>
   );
 }
