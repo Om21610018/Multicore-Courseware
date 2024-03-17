@@ -98,7 +98,9 @@ function CoursePage() {
         <h3>References:</h3>
         <ul>
           <li>
-            <a href="https://www.open-mpi.org/doc/" target="_blank">Reference 1</a>
+            <a href="https://www.open-mpi.org/doc/" target="_blank">
+              Reference 1
+            </a>
           </li>
           <li>
             <a href="#">Reference 2</a>
